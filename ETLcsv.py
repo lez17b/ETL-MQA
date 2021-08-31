@@ -33,6 +33,12 @@ class ExtractTransformLoad:
         df = self.df
         return df.to_csv("new_" + field + ".csv")
 
+    # Zero value in field to empty field
+    def zero_handler_null(self, field):
+        self.df[field] = self.df[field].replace(" ", 0)
+        df = self.df
+        return df.to_csv("new_" + field + ".csv")
+
 ############################################################
 ###                  Date value handlers                  ##
 ############################################################
@@ -58,11 +64,9 @@ class ExtractTransformLoad:
         return self.df.to_csv("new_" + field)
 
     # Advanced date format handler it requires to type the date format
-    def date_adv_handler(self):
-        print("Please enter the date format you want in this format: %x/%y/%z example: %d/%m/%y")
-        formatting = input(" please enter the format")
-        field = input("Now please enter teh field you want to format:")
-        self.df[field] = pd.to_datetime(self.df[field], format=formatting)
+    def date_adv_handler(self, format_base, field):
+        # print("Please enter the date format you want in this format: %x/%y/%z example: %d/%m/%y")
+        self.df[field] = pd.to_datetime(self.df[field], format=format_base)
         return self.df.to_csv("new_" + field)
 
     # Integer to date handler

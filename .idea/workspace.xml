@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="534887fb-6b0c-4dfd-a1ab-e0f524030f71" name="Changes" comment="etl for csv version 1.0">
-      <change afterPath="$PROJECT_DIR$/file.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ETL-csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/ETLcsv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="534887fb-6b0c-4dfd-a1ab-e0f524030f71" name="Changes" comment="etl for csv version 1.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630443205842</updated>
       <workItem from="1630443209058" duration="1486000" />
-      <workItem from="1630444942229" duration="1363000" />
+      <workItem from="1630444942229" duration="1719000" />
     </task>
     <task id="LOCAL-00001" summary="etl for csv version 1.0">
       <created>1630443812474</created>
@@ -102,6 +96,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="etl for csv version 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="etl for csv version 1.0" />
+    <MESSAGE value="etl for csv version 1.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="etl for csv version 1.1" />
   </component>
 </project>

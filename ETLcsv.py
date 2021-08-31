@@ -86,6 +86,33 @@ class ExtractTransformLoad:
     def df_tail(self):
         print(self.df.tail())
 
+############################################################
+###                Transformation methods                ###
+############################################################
+
+    # Group bu method in order to filter filds
+    def group_by_df(self, field1, field2, operation):
+        df = self.df
+        df.groupby(field1)[field2].transform(operation)
+        return df.to_csv("groupBy_" + field1 + "_" + field2 + "_" + df + ".csv")
+
+    # Transpose method
+    def transpose_df(self):
+        df = self.df.T
+        return df.to_csv("transposed" + df + ".csv")
+
+    # Matrix operations using the pandas operation tool set
+    def linear_algebra(self, operation, amount):
+        df = self.df
+        if operation == 'sum':
+            df = df.sum(amount)
+        elif operation == 'div':
+            df = df.div(amount)
+        elif operation == 'reverse-div':
+            df = df.rdiv(amount)
+        elif operation == 'multiply':
+            df = df * amount
+        return df.to_csv("operation_" + operation + ".csv")
 
 
 

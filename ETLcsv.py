@@ -11,17 +11,17 @@ class ExtractTransformLoad:
     def __init__(self, data):
         self.df = pd.read_csv(data, encoding='unicode_escape',  error_bad_lines=False)
 
-    # Print the data frame
-    def print_df(self):
-        print(self.df)
+############################################################
+###           Empty, null, NaN value handlers             ##
+############################################################
 
     # Null field handler for specific rows
     def null_handler(self, field):
-        self.df[field] = self.df[field].replace([0], " ")
+        self.df[field] = self.df[field].replace(0, " ")
         df = self.df
         return self.df.to_csv("new_" + field + ".csv")
 
-    # Null field handler for specific rows
+    # NaN field handler for specific rows
     def nan_handler(self, field):
         self.df[field] = self.df[field].replace("NaN", " ")
         df = self.df
@@ -29,9 +29,13 @@ class ExtractTransformLoad:
 
     # Zero value in field to null text value
     def zero_handler(self, field):
-        self.df[field] = self.df[field].replace(["null"], 0)
+        self.df[field] = self.df[field].replace("null", 0)
         df = self.df
         return df.to_csv("new_" + field + ".csv")
+
+############################################################
+###                  Date value handlers                  ##
+############################################################
 
     # Date format handler type 1 = dd/mm/yyyy
     def date_to_dmy(self, field):
@@ -65,6 +69,14 @@ class ExtractTransformLoad:
     def int_to_date(self, field):
         self.df.to_datetime(str(field), format='%Y-%m-%d')
         return self.df.to_csv("new_" + field)
+
+############################################################
+###                  Data visualizers                     ##
+############################################################
+
+    # Print the data frame
+    def print_df(self):
+        print(self.df)
 
     # data frame head
     def df_head(self):

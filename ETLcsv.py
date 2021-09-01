@@ -49,7 +49,7 @@ class ExtractTransformLoad:
         return df.to_csv("new_" + field + ".csv")
 
 ############################################################
-###                  Date value handlers                 ###
+###                  Replacement handler                 ###
 ############################################################
 
     def replace_values(self, field, fr, to):
@@ -203,9 +203,14 @@ class DatabaseManagerMySQL:
                 self.connection.close()
                 print("MySQL connection is closed")
 
+    # Execute query function
+    # using MySQL methods
     def execute_query(self, query):
         cursor = self.connection.cursor()
-        cursor.execute(query)
+        result = cursor.execute(query)
+        return result
+
+
 
 
 

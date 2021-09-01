@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="534887fb-6b0c-4dfd-a1ab-e0f524030f71" name="Changes" comment="etl for csv version 1.1">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ETLcsv.py" beforeDir="false" afterPath="$PROJECT_DIR$/ETLcsv.py" afterDir="false" />
-    </list>
+    <list default="true" id="534887fb-6b0c-4dfd-a1ab-e0f524030f71" name="Changes" comment="etl for csv version 1.1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,7 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1630443205842</updated>
       <workItem from="1630443209058" duration="1486000" />
-      <workItem from="1630444942229" duration="9709000" />
+      <workItem from="1630444942229" duration="10204000" />
     </task>
     <task id="LOCAL-00001" summary="etl for csv version 1.0">
       <created>1630443812474</created>

@@ -1,7 +1,12 @@
-import numpy as np
 import pandas as pd
-# Luciano Zavala´s  personal library
-# Built on top of NumPy and Pandas frameworks
+import mysql.connector
+from mysql.connector import Error
+
+#################################################################
+##             Luciano Zavala´s ETL personal library           ##
+##          Built on top of NumPy and Pandas frameworks.       ##
+## The library is designed to be used as a scientific library. ##
+#################################################################
 
 
 # class for CSV extraction
@@ -174,9 +179,33 @@ class ExtractTransformLoad:
         return df.to_csv("new_unstacked.csv")
 
 
+class DatabaseManagerMySQL:
 
+    # Constructor
+    def __init__(self, host, database, user, password):
+        self.host = host
+        self.database = database
+        self.user = user
+        self.password = password
+        try:
+            self.connection = mysql.connector.connect(host=self.host,
+                                                      database=self.database,
+                                                      user=self.user,
+                                                      password=self.password)
+            if self.connection.is_connected():
+                db_info = self.connection.get_server_info()
+                print("Connected to MySQL Server version ", db_info)
 
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+        finally:
+            if self.connection.is_connected():
+                self.connection.close()
+                print("MySQL connection is closed")
 
+    def execute_query(self, query):
+        cursor = self.connection.cursor()
+        cursor.execute(query)
 
 
 

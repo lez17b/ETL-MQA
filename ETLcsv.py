@@ -210,6 +210,11 @@ class DatabaseManagerMySQL:
         result = cursor.execute(query)
         return result
 
+    # Close connection function
+    # Using MySQL methods
+    def close_connection(self):
+        self.connection.close()
+
 
 
 

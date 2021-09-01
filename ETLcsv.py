@@ -12,7 +12,7 @@ class ExtractTransformLoad:
         self.df = pd.read_csv(data, encoding='unicode_escape',  error_bad_lines=False)
 
 ############################################################
-###           Empty, null, NaN value handlers             ##
+###           Empty, null, NaN value handlers            ###
 ############################################################
 
     # Null field handler for specific rows
@@ -40,7 +40,7 @@ class ExtractTransformLoad:
         return df.to_csv("new_" + field + ".csv")
 
 ############################################################
-###                  Date value handlers                  ##
+###                  Date value handlers                 ###
 ############################################################
 
     # Date format handler type 1 = dd/mm/yyyy
@@ -67,15 +67,15 @@ class ExtractTransformLoad:
     def date_adv_handler(self, format_base, field):
         # print("Please enter the date format you want in this format: %x/%y/%z example: %d/%m/%y")
         self.df[field] = pd.to_datetime(self.df[field], format=format_base)
-        return self.df.to_csv("new_" + field)
+        return self.df.to_csv("new_" + field + ".csv")
 
     # Integer to date handler
     def int_to_date(self, field):
         self.df.to_datetime(str(field), format='%Y-%m-%d')
-        return self.df.to_csv("new_" + field)
+        return self.df.to_csv("new_" + field + ".csv")
 
 ############################################################
-###                  Data visualizers                     ##
+###                  Data visualizers                    ###
 ############################################################
 
     # Print the data frame
@@ -117,6 +117,28 @@ class ExtractTransformLoad:
         elif operation == 'multiply':
             df = df * amount
         return df.to_csv("operation_" + operation + ".csv")
+
+    # Truncate the data frame by reducing rows from before to after
+    def truncate_df(self, before, after):
+        df = self.df
+        df.truncate(before=before, after=after)
+        return df.to_csv("new_truncated.csv")
+
+    # Truncate the data frame by reducing columns from before to after
+    def truncate_df_col(self, before, after, axis):
+        df = self.df
+        df.truncate(before=before, after=after, axis=axis)
+        return df.to_csv("new_truncated.csv")
+
+    # Truncate the data frame by date from before to after
+    def truncate_df_time(self, before, after):
+        df = self.df
+        b = pd.Timestamp(before)
+        a = pd.Timestamp(after)
+        df.truncate(before=b, after=a)
+        return df.to_csv("new_truncated.csv")
+
+
 
 
 

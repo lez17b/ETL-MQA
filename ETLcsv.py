@@ -232,15 +232,15 @@ class DatabaseManagerVertica:
                                                 password=self.password)
             if self.db.is_connected():
                 db_info = self.db.get_server_info()
-                print("Connected to MySQL Server version ", db_info)
+                print("Connected to Vertica Server version ", db_info)
             self.cursor = self.db.cursor()
 
         except Error as e:
-            print("Error while connecting to MySQL", e)
+            print("Error while connecting to Vertica", e)
         finally:
             if self.db.is_connected():
                 self.db.close()
-                print("MySQL connection is closed")
+                print("Vertica connection is closed")
 
     # Execute query function
     # using Vertica methods

@@ -1,6 +1,7 @@
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
+import vertica_db_client
 
 #################################################################
 ##             Luciano Zavala´s ETL personal library           ##
@@ -179,6 +180,7 @@ class ExtractTransformLoad:
         return df.to_csv("new_unstacked.csv")
 
 
+# MySQL Database manager class
 class DatabaseManagerMySQL:
 
     # Constructor
@@ -216,8 +218,47 @@ class DatabaseManagerMySQL:
         self.connection.close()
 
 
+# Vertica SQL Manager class
+class DatabaseManagerVertica:
 
+    # Constructor
+    def __init__(self, database, user, password):
+        self.database = database
+        self.user = user
+        self.password = password
+        try:
+            self.db = vertica_db_client.connect(database=self.database,
+                                                user=self.user,
+                                                password=self.password)
+            if self.db.is_connected():
+                db_info = self.db.get_server_info()
+                print("Connected to MySQL Server version ", db_info)
+            self.cursor = self.db.cursor()
 
+        except Error as e:
+            print("Error while connecting to MySQL", e)
+        finally:
+            if self.db.is_connected():
+                self.db.close()
+                print("MySQL connection is closed")
 
+    # Execute query function
+    # using Vertica methods
+    def execute_query(self, query):
+        result = self.cursor.execute(query)
+        return result
+
+    # Fetch rows function
+    # using Vertica methods
+    def fetch_rows(self):
+        rows = self.cursor.fetchall()
+        return rows
+
+    # Print table function
+    # using Vertica methods
+    def print_data(self):
+        rows = self.cursor.fetchall()
+        for i, row in enumerate(rows):
+            print("Row", i, "Data = ", row)
 
 

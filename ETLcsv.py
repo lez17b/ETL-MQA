@@ -1,7 +1,7 @@
 import pandas as pd
 import mysql.connector
 from mysql.connector import Error
-import vertica_db_client
+# import vertica_db_client
 
 #################################################################
 ##             Luciano Zavala´s ETL personal library           ##
@@ -26,28 +26,36 @@ class ExtractTransformLoad:
     def null_handler(self, field):
         self.df[field] = self.df[field].replace(0, " ")
         df = self.df
-        return self.df.to_csv("new_" + field + ".csv")
+        df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # NaN field handler for specific rows
     # Using PANDAS functions
     def nan_handler(self, field):
         self.df[field] = self.df[field].replace("NaN", " ")
         df = self.df
-        return df.to_csv("new_" + field + ".csv")
+        df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Zero value in field to null text value
     # Using PANDAS functions
     def zero_handler(self, field):
         self.df[field] = self.df[field].replace("null", 0)
         df = self.df
-        return df.to_csv("new_" + field + ".csv")
+        df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Zero value in field to empty field
     # Using PANDAS functions
     def zero_handler_null(self, field):
         self.df[field] = self.df[field].replace(" ", 0)
         df = self.df
-        return df.to_csv("new_" + field + ".csv")
+        df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
 ############################################################
 ###                  Replacement handler                 ###
@@ -56,7 +64,9 @@ class ExtractTransformLoad:
     def replace_values(self, field, fr, to):
         df = self.df
         df[field] = df[field].replace(to, fr)
-        return df.to_csv("new_" + field + ".csv")
+        df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
 ############################################################
 ###                  Date value handlers                 ###
@@ -66,38 +76,50 @@ class ExtractTransformLoad:
     # Using PANDAS functions
     def date_to_dmy(self, field):
         self.df[field] = self.df[field].dt.strftime("%d/%m/%y")
-        return self.df.to_csv("new_" + field)
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Date format handler type 2 = mm/dd/yyyy
     # Using PANDAS functions
     def date_to_mdy(self, field):
         self.df[field] = self.df[field].dt.strftime("%m/%d/%y")
-        return self.df.to_csv("new_" + field)
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Date format handler type 3 = yyyy/mm/dd
     # Using PANDAS functions
     def date_to_ymd(self, field):
         self.df[field] = self.df[field].dt.strftime("%y/%m/%d")
-        return self.df.to_csv("new_" + field)
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Date format handler type 4 = yyyy/dd/mm
     # Using PANDAS functions
     def date_to_ydm(self, field):
         self.df[field] = self.df[field].dt.strftime("%y/%d/%m")
-        return self.df.to_csv("new_" + field)
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Advanced date format handler it requires to type the date format
     # Using PANDAS functions
     def date_adv_handler(self, format_base, field):
         # print("Please enter the date format you want in this format: %x/%y/%z example: %d/%m/%y")
         self.df[field] = pd.to_datetime(self.df[field], format=format_base)
-        return self.df.to_csv("new_" + field + ".csv")
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
     # Integer to date handler
     # Using PANDAS functions
     def int_to_date(self, field):
         self.df.to_datetime(str(field), format='%Y-%m-%d')
-        return self.df.to_csv("new_" + field + ".csv")
+        self.df.to_csv("new_" + field + ".csv")
+        stream = "new_" + filed + ".csv"
+        return stream
 
 ############################################################
 ###                  Data visualizers                    ###
@@ -127,13 +149,17 @@ class ExtractTransformLoad:
     def group_by_df(self, field1, field2, operation):
         df = self.df
         df.groupby(field1)[field2].transform(operation)
-        return df.to_csv("groupBy_" + field1 + "_" + field2 + "_" + df + ".csv")
+        df.to_csv("groupBy_" + field1 + "_" + field2 + "_" + df + ".csv")
+        stream = "groupBy_" + field1 + "_" + field2 + "_" + df + ".csv"
+        return stream
 
     # Transpose method
     # Using PANDAS functions
     def transpose_df(self):
         df = self.df.T
-        return df.to_csv("transposed" + df + ".csv")
+        df.to_csv("transposed" + df + ".csv")
+        stream = "transposed" + df + ".csv"
+        return stream
 
     # Matrix operations using the pandas operation tool set
     # Using PANDAS functions
@@ -147,21 +173,27 @@ class ExtractTransformLoad:
             df = df.rdiv(amount)
         elif operation == 'multiply':
             df = df * amount
-        return df.to_csv("operation_" + operation + ".csv")
+        df.to_csv("operation_" + operation + ".csv")
+        stream = "operation_" + operation + ".csv"
+        return stream
 
     # Truncate the data frame by reducing rows from before to after
     # Using PANDAS functions
     def truncate_df(self, before, after):
         df = self.df
         df.truncate(before=before, after=after)
-        return df.to_csv("new_truncated.csv")
+        df.to_csv("new_truncated.csv")
+        stream = "new_truncated.csv"
+        return stream
 
     # Truncate the data frame by reducing columns from before to after
     # Using PANDAS functions
     def truncate_df_col(self, before, after, axis):
         df = self.df
         df.truncate(before=before, after=after, axis=axis)
-        return df.to_csv("new_truncated.csv")
+        df.to_csv("new_truncated.csv")
+        stream = "new_truncated.csv"
+        return stream
 
     # Truncate the data frame by date from before to after
     # Using PANDAS functions
@@ -170,14 +202,18 @@ class ExtractTransformLoad:
         b = pd.Timestamp(before)
         a = pd.Timestamp(after)
         df.truncate(before=b, after=a).tail()
-        return df.to_csv("new_truncated.csv")
+        df.to_csv("new_truncated.csv")
+        stream = "new_truncated.csv"
+        return stream
 
     # Unstack function based on a dataframe
     # Using PANDAS functions
     def unstack_df(self, level):
         df = self.df
         df.unstack(level=level)
-        return df.to_csv("new_unstacked.csv")
+        df.to_csv("new_unstacked.csv")
+        stream = "new_unstacked.csv"
+        return stream
 
 
 # MySQL Database manager class
